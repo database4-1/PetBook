@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RegisterActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="나의 펫"
+                android:textColor="#0277BD"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:hint="펫아이디"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="#546E7A"
+                android:textColorHint="#546E7A"
+                android:id="@+id/petidText"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:layout_marginTop="50dp"
+                android:background="@color/colorWhite"/>
+
+
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:hint="펫이름"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="#546E7A"
+                android:textColorHint="#546E7A"
+                android:id="@+id/petnameText"
+                android:drawableStart="@drawable/ic_sentiment_satisfied_black_24dp"
+                android:drawableLeft="@drawable/ic_sentiment_satisfied_black_24dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"/>
+            <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:hint="펫몸무게"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="#546E7A"
+                android:textColorHint="#546E7A"
+                android:id="@+id/petweightText"
+                android:drawableStart="@drawable/ic_sentiment_satisfied_black_24dp"
+                android:drawableLeft="@drawable/ic_sentiment_satisfied_black_24dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWhite"/>
+
+            <!--//여성남성체크란-->
+            <RadioGroup
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/genderGroup"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="여성"
+                    android:id="@+id/genderWomen"
+                    android:layout_weight="1"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="남성"
+                    android:id="@+id/genderMen"
+                    android:layout_weight="1"/>
+
+            </RadioGroup>
+            <!--//나이-->
+            <Spinner
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/yearSpinner">
+
+            </Spinner>
+            <!--//우리는동물종류선택-->
+            <Spinner
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/animalSpinner"
+                >
+
+            </Spinner>
+            <!--//종의종-하는법모름-->
+            <Spinner
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/catbreedSpinner">
+
+            </Spinner>
+
+            <Spinner
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:id="@+id/dogbreedSpinner">
+
+            </Spinner>
+
+            <Button
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@color/colorAccent"
+                android:text="등록하기"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/registerButton"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="animal">
+    <item>개</item>
+    <item>고양이</item>
+    <item>고슴도치</item>
+    <item>이구아나</item>
+    <item>햄스터</item>
+    <item>기니피그</item>
+  </string-array>
+</resources>

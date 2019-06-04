@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="catbreed">
+        <item></item>
+        <item>샴</item>
+        <item>뱅갈</item>
+        <item>러시안블루</item>
+        <item>먼치킨</item>
+        <item>아비시니안</item>
+        <item>터키쉬앙고라</item>
+        <item>노르웨이숲</item>
+        <item>랙돌</item>
+        <item>페르시아</item>
+        <item>스코티쉬폴드</item>
+    </string-array>
+</resources>
