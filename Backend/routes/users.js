@@ -1,51 +1,99 @@
 var express = require('express');
-var mysql = require('mysql');
 var router = express.Router();
 
-var connection = mysql.createConnection({
-  host : 'localhost',
-  port : 3306,
-  user : 'root',
-  password : '51168496',
-  database : 'petbook'
-})
+var mysqlDB = require('../mysql-db');
 
-connection.connect(function(err) { 
-  if (err) { 
-    console.error('mysql connection error'); 
-    console.error(err); throw err; 
-  }else{ 
-    console.log("연결에 성공하였습니다."); 
-  } 
-});
+// /users
 
-
-/* GET users listing. */
+/* GET users listing. /users */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/register/user', function(req, res, next) {
-  connection.query('insert into user(id, pw, name, phone) values (?,?,?,?);', [req.body.id, req.body.pw, req.body.name, req.body.phone], function(error, info) {
+/* 회원 등록 /users/register */
+router.post('/register', function(req, res, next) {
+  var sql = 'insert into user(userID, pw, name, phone, gender) values (?,?,?,?,?);';
+  mysqlDB.query(sql, [req.body.userID, req.body.pw, req.body.name, req.body.phone, req.body.gender], function(error, info) {
     if(error == null) {
-      res.send("register user success");
+      console.log(info);
+      res.json({
+        "code" : 200,
+        "result" : "success"
+      });
     }
-    else{
-      res.status(503).json(error);
+    else{ // 사용자 ID가 중복되면
+      console.log(error);
+      res.json({
+        "code" : 400,
+        "result" : "failed"
+      });
     }
   })
 });
 
-router.post('/register/pets', function(req, res, next) {
-  connection.query('insert into pets(ownerID, name, species, gender, age, weight, speciesOfSpecies) values (?,?,?,?,?,?,?);', [req.body.ownerID, req.body.name, req.body.species, req.body.gender, req.body.age, req.body.weight, req.body.speciesOfSpecies], function(error, info) {
+/* 로그인  /users/login */
+router.post('/login', function(req, res, next) {
+  var sql = 'select * from user where userID = ?';
+  mysqlDB.query(sql, [req.body.userID], function(error, result) {
     if(error == null) {
-      res.send("register pets success");
+      if(result.length > 0) {
+        if(result[0].pw == req.body.pw) {
+          console.log('login success');
+          res.json({
+            "code" : 200,
+            "result" : result
+          });
+        }
+        else {
+          console.log('Password does not match');
+          res.json({
+            "code" : 204,
+            "result" : "Password does not match"
+          });
+        }
+      }
+      else {
+        console.log('ID does not match');
+        res.json({
+          "code" : 204,
+          "result" : "ID does not match"
+        });
+      }
     }
-    else{
-      res.status(503).json(error);
+    else {
+      console.log(error);
+      res.json({
+        "code" : 400,
+        "result" : "failed"
+      });      
     }
-  })
+  });
 });
+
+
+/* 회원 정보 수정 /users/modifyinfo */
+router.post('/modifyinfo', function(req, res, next) {
+  var sql = 'update user set userID=?, pw=?, name=?, phone=?, gender=? where userID=?';
+  mysqlDB.query(sql, [req.body.newUserID, req.body.pw, req.body.name, req.body.phone, req.body.gender, req.body.oldUserID], function(error, result) {
+    if(error == null){
+      console.log(result);
+      console.log('Modify Info success');
+        res.json({
+          "code" : 200,
+          "result" : "success"
+        });
+    }
+    else { // foreign key 에러 날때, 이미 존재 하는 아이디 일때
+      console.log(error);
+      res.json({
+        "code" : 400,
+        "result" : "failed"
+      });
+    }
+  });
+});
+
+
 
 
 

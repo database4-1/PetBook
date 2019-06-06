@@ -7,8 +7,20 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var petsRouter = require('./routes/pets');
+var hospitalRouter = require('./routes/hospital');
 
 var app = express();
+
+var mysqlDB = require('./mysql-db');
+mysqlDB.connect(function(err) { 
+  if (err) { 
+    console.error('mysql connection error'); 
+    console.error(err); throw err; 
+  }else{ 
+    console.log("연결에 성공하였습니다."); 
+  } 
+});
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -28,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/pets', petsRouter);
+app.use('/hospital', hospitalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
