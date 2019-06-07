@@ -93,8 +93,27 @@ router.post('/modifyinfo', function(req, res, next) {
   });
 });
 
-
-
+/* 사용자의 예약 조회 */
+router.get('/appointment/list', function(req, res, next) {
+  var sql = 'select * from CheckAppointment where userID=?;';
+  mysqlDB.query(sql, [req.query.userID], function(error, appointment) {
+    if(error == null){
+      console.log(appointment);
+      console.log('Modify Info success');
+        res.json({
+          "code" : 200,
+          "result" : appointment
+        });
+    }
+    else {
+      console.log(error);
+      res.json({
+        "code" : 400,
+        "result" : "failed"
+      })
+    }
+  });
+});
 
 
 module.exports = router;

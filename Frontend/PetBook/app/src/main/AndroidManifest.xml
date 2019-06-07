@@ -36,11 +36,19 @@
         <activity android:name=".PetActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".HospitalInfoPopupActivity"  android:theme="@style/popupTheme"/>
-        <activity android:name=".HospitalListActivity">
+        <activity android:name=".HospitalListActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
         <activity android:name=".HospitalAppointmentActivity"/>
         <activity android:name=".MyPageActivity"/>
+        <activity android:name=".PetListActivity"/>
+        <activity android:name=".RegisterPetActivity">
+
+        </activity>
+        <activity android:name=".ModifyMemInfoActivity"/>
+        <activity android:name=".AppointmentCheckAcitivity"/>
+        <activity android:name=".PetInfoPopupActivity" android:theme="@style/popupTheme" />
 
     </application>
 

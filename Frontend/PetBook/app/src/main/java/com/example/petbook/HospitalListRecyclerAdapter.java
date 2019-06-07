@@ -28,6 +28,8 @@ public class HospitalListRecyclerAdapter extends RecyclerView.Adapter<HospitalLi
             @Override
             public void onClick(View v) {
 
+                LoginData.getInstance().setHospitalID(listData.get(position).getHospitalID());
+
                 Intent intent = new Intent(v.getContext(), HospitalInfoPopupActivity.class);
                 intent.putExtra("hospitalID",listData.get(position).getHospitalID());
                 intent.putExtra("name",listData.get(position).getName());
@@ -36,8 +38,8 @@ public class HospitalListRecyclerAdapter extends RecyclerView.Adapter<HospitalLi
                 intent.putExtra("addressSi",listData.get(position).getAddressSi());
                 intent.putExtra("addressGu",listData.get(position).getAddressGu());
                 intent.putExtra("addressDetail",listData.get(position).getAddressDetail());
-                intent.putExtra("startTime",listData.get(position).getStartTime());
-                intent.putExtra("endTime", listData.get(position).getEndTime());
+                intent.putExtra("startTime", String.valueOf(listData.get(position).getStartTime()));
+                intent.putExtra("endTime", String.valueOf(listData.get(position).getEndTime()));
 
                 v.getContext().startActivity(intent);
             }

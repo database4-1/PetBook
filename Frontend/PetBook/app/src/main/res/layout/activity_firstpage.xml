@@ -36,6 +36,7 @@
 
 
             <Button
+                android:id="@+id/reserveHospital"
                 android:layout_width="280dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -47,6 +48,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/reserveHaircut"
                 android:layout_width="280dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -58,6 +60,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/etc"
                 android:layout_width="280dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
@@ -79,6 +82,7 @@
 
 
         <Button
+            android:id="@+id/mypage"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"

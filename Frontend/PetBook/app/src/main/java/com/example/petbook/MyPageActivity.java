@@ -26,7 +26,7 @@ public class MyPageActivity extends AppCompatActivity {
         appointmentInquiryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPageActivity.this, FirstpageActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, AppointmentCheckAcitivity.class);
                 startActivity(intent);
             }
         });
@@ -34,7 +34,8 @@ public class MyPageActivity extends AppCompatActivity {
         petInquiryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPageActivity.this, FirstpageActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, PetListActivity.class);
+                LoginData.getInstance().setTmp(1);
                 startActivity(intent);
             }
         });
@@ -42,7 +43,7 @@ public class MyPageActivity extends AppCompatActivity {
         petRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPageActivity.this, FirstpageActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, RegisterPetActivity.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +51,7 @@ public class MyPageActivity extends AppCompatActivity {
         userInfoModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyPageActivity.this, FirstpageActivity.class);
+                Intent intent = new Intent(MyPageActivity.this, ModifyMemInfoActivity.class);
                 startActivity(intent);
             }
         });

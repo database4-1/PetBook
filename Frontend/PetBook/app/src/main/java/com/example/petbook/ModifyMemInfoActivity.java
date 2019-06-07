@@ -1,16 +1,13 @@
 package com.example.petbook;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,12 +17,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends AppCompatActivity {
+public class ModifyMemInfoActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-
-    private ArrayAdapter adapter;
-    private Spinner spinner;
 
     private TextView idText;
     private TextView passwordText;
@@ -41,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_modify_mem_info);
 
         // Toolbar 설정
         mToolbar = (Toolbar) findViewById(R.id.toolBar);
@@ -59,41 +53,58 @@ public class RegisterActivity extends AppCompatActivity {
 
         registerButton = (Button) findViewById(R.id.registerButton);
 
+        idText.setText(LoginData.getInstance().getUserID());
+        passwordText.setText(LoginData.getInstance().getPw());
+        nameText.setText(LoginData.getInstance().getName());
+        phoneNumberText.setText(LoginData.getInstance().getPhone());
+        if(LoginData.getInstance().getGender().equals("여성")) {
+            genderWomen.setChecked(true);
+        }
+        else {
+            genderMen.setChecked(true);
+        }
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 JsonObject registerdata = new JsonObject();
-                registerdata.addProperty("userID", idText.getText().toString());
+                registerdata.addProperty("newUserID", idText.getText().toString());
                 registerdata.addProperty("pw", passwordText.getText().toString());
                 registerdata.addProperty("name", nameText.getText().toString());
                 registerdata.addProperty("phone", phoneNumberText.getText().toString());
 
                 RadioButton selectedRdo = (RadioButton) findViewById(genderGroup.getCheckedRadioButtonId());
                 registerdata.addProperty("gender", selectedRdo.getText().toString());
+                registerdata.addProperty("oldUserID", LoginData.getInstance().getUserID());
 
                 RetrofitCommnunication retrofitCommnunication = new ServerComm().init();
-                Call<JsonObject> register = retrofitCommnunication.userRegister(registerdata);
+                Call<JsonObject> modify = retrofitCommnunication.modifyInfo(registerdata);
 
-                register.enqueue(new Callback<JsonObject>() {
+                modify.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         if (response.body().get("code").getAsInt() == 200) {
-                            Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT)
+                            Toast.makeText(ModifyMemInfoActivity.this, "회원 정보 수정 성공", Toast.LENGTH_SHORT)
                                     .show();
-                            Intent intent = new Intent(RegisterActivity.this, RegisterPetActivity.class);
-                            startActivity(intent);
+
+                            LoginData.getInstance().setUserID(idText.getText().toString());
+                            LoginData.getInstance().setPw(passwordText.getText().toString());
+                            LoginData.getInstance().setName(nameText.getText().toString());
+                            LoginData.getInstance().setPhone(phoneNumberText.getText().toString());
+                            LoginData.getInstance().setGender(selectedRdo.getText().toString());
+
                             finish();
                         }
                         else {
-                            Toast.makeText(RegisterActivity.this, "회원가입 실패, 아이디 중복", Toast.LENGTH_SHORT)
+                            Toast.makeText(ModifyMemInfoActivity.this, "회원정보 수정 오류, 아이디 중복", Toast.LENGTH_SHORT)
                                     .show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<JsonObject> call, Throwable t) {
-                        Toast.makeText(RegisterActivity.this, "정보받아오기 실패", Toast.LENGTH_LONG)
+                        Toast.makeText(ModifyMemInfoActivity.this, "정보받아오기 실패", Toast.LENGTH_LONG)
                                 .show();
                         Log.e("TAG", "onFailure: " + t.getMessage() );
                     }
@@ -104,4 +115,5 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
 }

@@ -7,6 +7,10 @@ public class LoginData {
     private String name;
     private String phone;
     private String gender;
+    private int petID;
+    private int hospitalID;
+    private int tmp;
+    private String species;
 
     public String getUserID() {
         return userID;
@@ -48,7 +52,37 @@ public class LoginData {
         this.gender = gender;
     }
 
+    public int getPetID() {
+        return petID;
+    }
 
+    public void setPetID(int petID) {
+        this.petID = petID;
+    }
+
+    public int getHospitalID() {
+        return hospitalID;
+    }
+
+    public void setHospitalID(int hospitalID) {
+        this.hospitalID = hospitalID;
+    }
+
+    public int getTmp() {
+        return tmp;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public void setTmp(int tmp) {
+        this.tmp = tmp;
+    }
 
     public static void setInstance(LoginData instance) {
         LoginData.instance = instance;

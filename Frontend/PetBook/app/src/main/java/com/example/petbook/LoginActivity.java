@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else {
-                            Toast.makeText(LoginActivity.this, response.body().get("code").getAsString(), Toast.LENGTH_SHORT)
+                            Toast.makeText(LoginActivity.this, response.body().get("result").getAsString(), Toast.LENGTH_SHORT)
                             .show();
                         }
 
